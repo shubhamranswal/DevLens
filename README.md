@@ -6,11 +6,7 @@ A CLI tool to quickly understand unfamiliar codebases through structured analysi
 [![Version](https://img.shields.io/badge/version-v0.2.0-black.svg)]()
 [![CLI Tool](https://img.shields.io/badge/type-CLI-lightgrey.svg)]()
 
-<details>
-<summary></summary>
 <img src="https://komarev.com/ghpvc/?username=shubhamranswal&color=00000000&label=" width="1" height="1" />
-</details>
-
 
 DevLens is a lightweight CLI tool that analyzes a codebase and provides a structured summary of its technology stack, architecture, and organization.
 
