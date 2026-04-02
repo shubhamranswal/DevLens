@@ -45,10 +45,26 @@ go build -o devlens.exe ./cmd/devlens
 devlens analyze .
 ```
 
+### Analyze a remote repository (fast mode)
+
+```bash
+devlens analyze https://github.com/user/repo --fast
+````
+
+* Uses GitHub API (no cloning required)
+* Faster for large repositories
+* May have limited accuracy for framework detection
+
 ### JSON output
 
 ```bash
 devlens analyze . --json
+```
+
+or 
+
+```bash
+devlens analyze . --json > report.json
 ```
 
 ### Other commands

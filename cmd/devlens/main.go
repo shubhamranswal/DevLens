@@ -7,6 +7,7 @@ import (
 	"devlens/internal/scanner"
 	"fmt"
 	"os"
+	"strings"
 )
 
 const version = "v0.1.0"
@@ -18,6 +19,7 @@ func main() {
 	var jsonOutput bool
 	var versionFlag bool
 	var helpFlag bool
+	var fastMode bool
 
 	var filteredArgs []string
 
@@ -29,6 +31,8 @@ func main() {
 			versionFlag = true
 		case "--help":
 			helpFlag = true
+		case "--fast":
+			fastMode = true
 		default:
 			filteredArgs = append(filteredArgs, arg)
 		}
@@ -61,10 +65,21 @@ Flags:
 
 	path := filteredArgs[1]
 
-	scan, err := scanner.Scan(path)
-	if err != nil {
-		fmt.Println("Error:", err)
-		return
+	var scan *model.ScanResult
+
+	if strings.HasPrefix(path, "http") && fastMode {
+		scan = analyzer.RemoteScan(path)
+		if scan == nil {
+			fmt.Println("Failed to analyze remote repository")
+			return
+		}
+	} else {
+		var err error
+		scan, err = scanner.Scan(path)
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
 	}
 
 	result := &model.AnalysisResult{

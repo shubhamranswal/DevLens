@@ -51,6 +51,9 @@ func DetectFrameworks(scan *model.ScanResult) []string {
 				}
 			}
 		}
+		if strings.HasSuffix(file, "package.json") {
+			frameworks = append(frameworks, "Node.js (detected)")
+		}
 	}
 
 	return unique(frameworks)
